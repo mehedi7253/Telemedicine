@@ -78,7 +78,7 @@ $doctor = mysqli_fetch_assoc($result_set);
                                         }else{
                                             $fileinfo = PATHINFO($_FILES['image']['name']);
                                             $newFile = $fileinfo['filename'] . "." . $fileinfo['extension'];
-                                            move_uploaded_file($_FILES['image']['tmp_name'], "../images/users" . $newFile);
+                                            move_uploaded_file($_FILES['image']['tmp_name'], "../images/users/" . $newFile);
                                             $location = $newFile;
                                             $sql_update = mysqli_query($conn, "UPDATE users SET name = '$name', phone = '$phone', dob = '$dob', image = '$newFile' WHERE id = $doctor_id"); // Update Doctor Profile
 

@@ -2,7 +2,7 @@
 session_start();?>
 <?php include_once(BASE_PATH.'/part/header.php'); 
 include_once(BASE_PATH.'/telemedicine.php');
-$sql="SELECT from doctor  WHERE user_id =".$_SESSION['user_id'];
+$sql="SELECT * FROM doctor  WHERE user_id = '42'";
 $result_set=$conn->query($sql);
 
 $sql="SELECT from doctor_schedule  WHERE patient_id IS NOT NULL";

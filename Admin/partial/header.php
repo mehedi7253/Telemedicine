@@ -33,6 +33,15 @@
     <link href="<?=BASE_URL ?>Admin/css/style.css" rel="stylesheet">
     <link href="<?=BASE_URL ?>Admin/css/lib/data-table/buttons.bootstrap.min.css" rel="stylesheet" />
     <link href="<?=BASE_URL ?>Admin/css/prescription.css" rel="stylesheet" />
+
+    <link rel="" href="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js">  
+    <link rel="" href="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"> 
+    <link rel="" href="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"> 
+    <link rel="" href="https://cdn.datatables.net/responsive/2.4.0/js/responsive.bootstrap4.min.js"> 
+    
+  
+   
+
 </head>
 
 <body>

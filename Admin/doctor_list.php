@@ -83,8 +83,10 @@ $result_set=$conn->query($sql);
                                                     <td><?=$doctor['department']?></td>
                                                     <td><?=$doctor['visit_fee']?></td>
                                                     <td><?=$doctor['specialization']?></td>
-                                                    <td><button type="button" class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5"><i class="fa fa-pencil"></i>Upadate</button>
-                                                    <button type="button" class="btn btn-danger btn-flat btn-addon m-b-10 m-l-5"><i class="fa fa-trash-o"></i>Delete</button></td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5"><i class="fa fa-pencil"></i>Upadate</button>
+                                                        <button type="button" class="btn btn-danger btn-flat btn-addon m-b-10 m-l-5"><i class="fa fa-trash-o"></i>Delete</button>
+                                                    </td>
                                                 
                                                 </tr>
                                                 

@@ -47,19 +47,27 @@
                 </li>
                 <?php if ($_SESSION['user_role'] == 2) { ?>
                     <li>
-                        <a class="sidebar-sub-toggle"><i class="ti-home"></i> Manage Profile
+                        <a class="sidebar-sub-toggle"><i class="ti-home2"></i> Manage Profile
                             <span class="badge badge-primary"></span>
                             <span class="sidebar-collapse-icon ti-angle-down"></span></a>
                         <ul>
                             <li><a href="doc_profile.php"> Profile</a></li>
                             <li><a href="update_profile.php">Update Profile</a></li>
-                            <li><a href="#">Change Password</a></li>
+                            <li><a href="change_pass.php">Change Password</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a class="sidebar-sub-toggle"><i class="ti-home"></i> Manage Profile</a>
-                        
+                        <a class="sidebar-sub-toggle"><i class="ti-home3"></i> Manage Schedule
+                            <span class="badge badge-primary"></span>
+                            <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                        <ul>
+                            <li><a href="set_schedule.php"> Add Schedule</a></li>
+                            <li><a href="manage_schedule.php"> Manage Schedule</a></li>
+                        </ul>
                     </li>
+                    <!-- <li>
+                        <a class="" href="set_schedule.php"><i class="ti-home3"></i> Manage Schedule</a>
+                    </li> -->
 
                 <?php } ?>
 
