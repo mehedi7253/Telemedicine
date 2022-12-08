@@ -1,0 +1,29 @@
+  <li><a class="sidebar-sub-toggle"><i class="ti-bar-chart-alt"></i> Users <span
+                                class="sidebar-collapse-icon ti-angle-down"></span></a>
+                        <ul>
+                        <?php if($_SESSION['user_role']==1){?>
+                            <li><a href="add_doctor.php">ADD Doctors</a></li>
+                            <li><a href="doctor_list.php">Doctors</a></li>
+                            <li><a href="Admin/users/patients.php">paitents</a></li>
+                            <li><a href="users/medic.php">Medicine company</a></li>
+                            
+                        </ul>
+                        <?php } elseif($_SESSION['user_role']==2){?>
+                    </li>
+                   
+                    <li><a class="sidebar-sub-toggle"><i class="ti-target"></i> Doctor <span
+                                class="sidebar-collapse-icon ti-angle-down"></span></a>
+                        <ul>
+                            <li><a href="doc_profile.php">Doctors Profile</a></li>
+                            <li><a href="page-register.html">Apponmet list</a></li>
+                            <li><a href="page-reset-password.html">Forgot password</a></li>
+                        </ul>
+                    </li>
+                    <?php } else{?>
+
+                        <ul>
+                            <li><a href="doc_profile.php">Add medicine</a></li>
+                            <li><a href="page-register.html">medicine list</a></li>
+                            
+                        </ul>
+                    <?php }?>

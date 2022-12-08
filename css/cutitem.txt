@@ -1,0 +1,7 @@
+.testimonial-block i {
+  font-size: 60px;
+  position: absolute;
+  right: 46px;
+  bottom: 89px;
+  opacity: 0.08;
+}

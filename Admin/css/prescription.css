@@ -1,0 +1,29 @@
+.pr-logo img {
+    width: 120px;
+}
+
+
+.pr-left-box input,
+.pr-prescription-box input {
+    border: none;
+    border-bottom: 1px solid #343434;
+    font-size: 16px;
+    outline: none;
+    width: 100%;
+
+}
+
+.pr-left-box ul li {
+    list-style: decimal;
+    margin-left: 18px;
+}
+
+.pr-left-box ul li span,
+.pr-prescription-box .medicine-name span {
+    cursor: pointer;
+}
+
+.pr-prescription-box ul li {
+    list-style: decimal;
+    margin-left: 20px;
+}
