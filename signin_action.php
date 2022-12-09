@@ -73,15 +73,18 @@ if($result_set->num_rows>0){
 	 exit;
  }
  if ($_SESSION['user_role']==1){
+
 	header("location:Admin/index.php");	
  }else if($_SESSION['user_role'] == 2){
+
 	header("location:Admin/doc_profile.php");	
  }else if($_SESSION['user_role'] == 3){
+
 	header("location:Admin/index.php");	
  }
  else if ($_SESSION['user_role']==0){
 	
-	header("location:index.php");	
+	header("location:profile.php");	
  }
 
 

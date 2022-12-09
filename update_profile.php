@@ -15,11 +15,22 @@ $user = mysqli_fetch_assoc($result_set);
     <div class="container">
         <div class="row">
             <div class="col-md-4 col-sm-12 float-left">
-                <?php if (isset ($_SESSION['message'])) 
-                        {
-                            echo $_SESSION['message'];
-                            unset($_SESSION['message']);
-                        } 
+                <?php 
+                    if (isset ($_SESSION['message'])) 
+                    {
+                        echo $_SESSION['message'];
+                        unset($_SESSION['message']);
+                    } 
+
+                    if(isset($_POST['update_user'])){
+                        $name  = $_POST['name'];
+                        $phone = $_POST['phone'];
+                        $dob   = $_POST['dob'];
+
+                        $sql_update = mysqli_query($conn, "UPDATE users SET name = '$name', phone = '$phone', dob = '$dob' WHERE id = $user[id]"); 
+
+                        $_SESSION['message'] = "Profile Update Success";
+                    }
                  ?>
                 <div class="card">
                     <div class="card-header">
@@ -39,29 +50,26 @@ $user = mysqli_fetch_assoc($result_set);
             <div class="col-md-8 col-sm-12 float-left">
                <div class="card">
                     <div class="card-header">
-                        <h5>My Profile</h5>
+                        <h3>Update Profile</h3>
                     </div>
                     <div class="card-body">
-                        <div class="col-md-4 col-sm-12 float-left">
-                            <img src="<?php echo $user['image']?>" style="height: 200px; width: 100%;">
-                        </div>
-                        <div class="col-md-8 col-sm-12 float-left">
-                            <div class="form-group">
-                                <input value="<?php echo $user['name']?>" class="form-control" disabled>
+                        <form action="" method="POST">
+                            <div class="form-group col-md-6 float-left">
+                                <input value="<?php echo $user['name']?>" class="form-control" name="name">
                             </div>
-                            <div class="form-group">
+                            <div class="form-group col-md-6 float-left">
                                 <input value="<?php echo $user['email']?>" class="form-control" disabled>
                             </div>
-                            <div class="form-group">
-                                <input value="<?php echo $user['phone']?>" class="form-control" disabled>
+                            <div class="form-group col-md-6 float-left">
+                                <input type="text" name="phone" value="<?php echo $user['phone']?>" class="form-control" >
                             </div>
-                            <div class="form-group">
-                                <input value="<?php echo $user['dob']?>" class="form-control" disabled>
+                            <div class="form-group col-md-6 float-left">
+                                <input type="date" name="dob" value="<?php echo $user['dob']?>" class="form-control" >
                             </div>
-                            <div class="form-group">
-                                <input type="password" value="<?php echo $user['password']?>" class="form-control" disabled>
+                            <div class="form-group col-md-12 float-left">
+                                <button type="submit" name="update_user" class="btn btn-success">Submit</button>
                             </div>
-                        </div>
+                        </form>
                     </div>
                </div>
             </div>
