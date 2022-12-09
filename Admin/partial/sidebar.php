@@ -64,6 +64,14 @@
                             <li><a href="set_schedule.php"> Manage Schedule</a></li>
                         </ul>
                     </li>
+                    <li>
+                        <a class="sidebar-sub-toggle"><i class="ti-home3"></i> Manage Appointment List
+                            <span class="badge badge-primary"></span>
+                            <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                        <ul>
+                            <li><a href="patient_appointment.php"> Appointment List</a></li>
+                        </ul>
+                    </li>
                     <!-- <li>
                         <a class="" href="set_schedule.php"><i class="ti-home3"></i> Manage Schedule</a>
                     </li> -->

@@ -41,7 +41,7 @@ $user = mysqli_fetch_assoc($result_set);
                         <i class="ico-home"></i> <a href="update_profile.php">Update Profile</a><br/>
                         <i class="ico-home"></i> <a href="change_pass.php">Change Password</a><br/>
                         <i class="ico-home"></i> <a href="change_profile_pic.php">Update Profile Picture</a><br/>
-                        <i class="ico-home"></i> <a href="profile.php">Appointment List</a><br/>
+                        <i class="ico-home"></i> <a href="appointment_list.php">Appointment List</a><br/>
                         <i class="fa-file-text"></i> <a href="profile.php">Prescription List</a><br/>
                     </div>
                 </div>

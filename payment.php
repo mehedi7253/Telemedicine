@@ -26,7 +26,7 @@ include_once(BASE_PATH.'/telemedicine.php');
 
         if(isset($_POST['bkas']))
         {
-            $payment = mysqli_query($conn, "UPDATE appointment SET status = '2', account_number = '$_POST[account_number]' WHERE id = '$id'");
+            $payment = mysqli_query($conn, "UPDATE appointment SET account_number = '$_POST[account_number]' WHERE id = '$id'");
 
             header('location: success.php');
             // echo "<script>document.location.href='success.php'</script>";
