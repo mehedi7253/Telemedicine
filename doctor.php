@@ -2,7 +2,7 @@
 session_start(); ?>
 <?php include_once(BASE_PATH.'/part/header.php');
 include_once(BASE_PATH.'/telemedicine.php');
-$sql="SELECT doctor.id, doctor.name,email,users.image as img,department,specialization,visit_fee
+$sql="SELECT doctor.id, doctor.user_id, doctor.name,email,users.image as img,department,specialization,visit_fee
 FROM doctor
 INNER JOIN users
 ON doctor.user_id = users.id";
@@ -48,114 +48,30 @@ $result_set=$conn->query($sql);
             </div>
         </div>
 
-
-        
-
-
-        <!-- <div class="row justify-content-center">
-            
-
-            <form  class="search-form">
-          
-              <i class="fa fa-search"></i>
-              <input type="text" name="search" id="search-item" placeholder="search by name" oneKeyup = "search()" >
-        </form>
-            
-        </div> -->
-
-
-        <!-- <div class="row justify-content-center">
-            <div class="col-4 text-center  mb-5">
-
-                <form action="#" class="search-form">
-               
-                    <input type="search" name="search" id= "search-item" placeholder="search by name" oneKeyup = "search()" >
-                    <input type="submit">
-
-                </form>
-            </div>
-        </div> -->
-        <div class="col-12 text-center  mb-5">
-            <div class="btn-group btn-group-toggle " data-toggle="buttons">
-                <label class="btn active ">
-                    <input type="radio" name="shuffle-filter" value="all" checked="checked" />All Department
-                </label>
-                <label class="btn ">
-                    <input type="radio" name="shuffle-filter" value="cat1" />Cardiology
-                </label>
-                <label class="btn">
-                    <input type="radio" name="shuffle-filter" value="cat2" />Dental
-                </label>
-                <label class="btn">
-                    <input type="radio" name="shuffle-filter" value="cat3" />Neurology
-                </label>
-                <label class="btn">
-                    <input type="radio" name="shuffle-filter" value="cat4" />Medicine
-                </label>
-                <label class="btn">
-                    <input type="radio" name="shuffle-filter" value="cat5" />Traumatology
-                </label>
-                <label class="btn">
-                    <input type="radio" name="shuffle-filter" value="cat6" />Psychiatrist
-                </label>
-                <label class="btn">
-                    <input type="radio" name="shuffle-filter" value="cat7" />Radiology
-                </label>
-                <label class="btn">
-                    <input type="radio" name="shuffle-filter" value="cat8" />Gianologist
-                </label>
-
-
-            </div>
-        </div>
-
         <div class="row shuffle-wrapper portfolio-gallery" id="doctor-list">
             <?php foreach($result_set as $doctor){?>
 
-            <div class="col-lg-3 col-sm-6 col-md-6 mb-4 shuffle-item" data-groups="[&quot;cat1&quot;]">
-                <div class="position-relative doctor-inner-box">
+            <div class="col-lg-3 col-sm-6 col-md-6 mb-4 shuffle-item">
+                <div class="position-relative doctor-inner-box" style="border: 1px solid silver;">
                     <div class="doctor-profile">
                         <div class="doctor-img">
-                            <img src="<?= BASE_URL ?>images/users/<?=$doctor['img']?>" alt="doctor-image" width="260" height="260" >
+                            <img src="images/users/<?php echo $doctor['img']?>" alt="doctor-image" width="100%" height="150px" >
                         </div>
                     </div>
-                    <div class="content mt-3">
-                        <h4 class="mb-0"><a href="doctor-single.php?doctor_id=<?=$doctor['id']?>"><?=$doctor['name']?></a></h4>
-                        <p><?=$doctor['department']?></p>
+                    <div class="content mt-3 m-3">
+                        <h4 class="mb-0 text-center"><a href="doctor-single.php?doctor_id=<?php echo $doctor['user_id']?>"><?php echo $doctor['name']?></a></h4>
+                        <p>Department: <?=$doctor['department']?></p>
+                        <p>Visiting Fee: <?php echo number_format($doctor['visit_fee'],2)?></p>
+                        <a class="btn btn-secondary" href="doctor-single.php?doctor_id=<?=$doctor['user_id']?>">Visit profile</a>
                     </div>
                 </div>
             </div>
           <?php } ?>
 
-            <!-- <div class="col-lg-3 col-sm-6 col-md-6 mb-4 shuffle-item" data-groups="[&quot;cat2&quot;]">
-                <div class="position-relative doctor-inner-box">
-                    <div class="doctor-profile">
-                        <div class="doctor-img">
-                            <img src="images/team/8.jpg" alt="doctor-image" width="260" height="260">
-                        </div>
-                    </div>
-                    <div class="content mt-3">
-                        <h4 class="mb-0"><a href="doctor-single.php">Harrision Samuel</a></h4>
-                        <p>Radiology</p>
-                    </div>
-                </div>
-            </div> -->
-
+         
            
 
-            <!-- <div class="col-lg-3 col-sm-6 col-md-6 mb-4 shuffle-item" data-groups="[&quot;cat3&quot;,&quot;cat4&quot;]">
-                <div class="position-relative doctor-inner-box">
-                    <div class="doctor-profile">
-                        <div class="doctor-img">
-                            <img src="images/team/9.jpg" alt="doctor-image" width="260" height="260">
-                        </div>
-                    </div>
-                    <div class="content mt-3">
-                        <h4 class="mb-0"><a href="doctor-single.php">Edward john</a></h4>
-                        <p>Pediatry</p>
-                    </div>
-                </div>
-            </div> -->
+        
 
            
           

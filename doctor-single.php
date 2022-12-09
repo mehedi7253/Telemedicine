@@ -2,10 +2,10 @@
 <?php include_once(BASE_PATH.'/part/header.php');
 include_once(BASE_PATH.'/telemedicine.php');
 $doctor_id = $_GET['doctor_id'];
-$sql="SELECT doctor.name,email,users.image as img,users.phone as phone, department,specialization,visit_fee
+$sql="SELECT doctor.name, doctor.user_id, email,users.image as img,users.phone as phone, department,specialization,visit_fee
 FROM doctor
 INNER JOIN users
-ON doctor.user_id = users.id WHERE doctor.id = $doctor_id  ";
+ON doctor.user_id = users.id WHERE doctor.user_id = $doctor_id  ";
 
 
 $result_set=$conn->query($sql);
@@ -21,12 +21,6 @@ $result_set=$conn->query($sql);
                 <div class="block text-center">
                     <span class="text-white">Doctor Details</span>
                     <h1 class="text-capitalize mb-5 text-lg">Alexandar james</h1>
-
-                    <!-- <ul class="list-inline breadcumb-nav">
-            <li class="list-inline-item"><a href="index.html" class="text-white">Home</a></li>
-            <li class="list-inline-item"><span class="text-white">/</span></li>
-            <li class="list-inline-item"><a href="#" class="text-white-50">Doctor Details</a></li>
-          </ul> -->
                 </div>
             </div>
         </div>
@@ -47,14 +41,6 @@ $result_set=$conn->query($sql);
                     <div class="info-block mt-4">
                         <h4 class="mb-0"><?=$doctor['name']?></h4>
                         <p><?=$doctor['department']?></p>
-
-                        <ul class="list-inline mt-4 doctor-social-links">
-                            <li class="list-inline-item"><a href="#!"><i class="icofont-facebook"></i></a></li>
-                            <li class="list-inline-item"><a href="#!"><i class="icofont-twitter"></i></a></li>
-                            <li class="list-inline-item"><a href="#!"><i class="icofont-skype"></i></a></li>
-                            <li class="list-inline-item"><a href="#!"><i class="icofont-linkedin"></i></a></li>
-                            <li class="list-inline-item"><a href="#!"><i class="icofont-pinterest"></i></a></li>
-                        </ul>
                     </div>
                 </div>
             </div>
@@ -65,7 +51,6 @@ $result_set=$conn->query($sql);
                     <div class="divider my-4"></div>
                     <!-- <h4 class="mb-0"><?=$doctor['name']?></h4> -->
                     </br>
-                    <!-- <h6 class="mb-0">james@gmail.com</h6> -->
                     <div class="contact-information">
 					<!-- <h4>Contact information : <?=$doctor['email']?></h4> -->
                         <div class="phone-content">
@@ -99,13 +84,13 @@ $result_set=$conn->query($sql);
                         </div>
                         <div class="skype-content">
 						<h4 class="mt-2">
-                            <span class="contact-title">Visit:</span>
-                            <span class="contact-skype"><?=$doctor['visit_fee']?></span>
+                            <span class="contact-title">Visiting Price:</span>
+                            <span class="contact-skype"><?= number_format($doctor['visit_fee'],2)?></span>
 							</h4>
                         </div>
                     </div>
 
-                    <a href="appointment.php" class="btn btn-main-2 btn-round-full mt-3">Make an Appoinment<i
+                    <a href="appointment.php?doctor_id=<?php echo $doctor['user_id']?>" class="btn btn-main-2 btn-round-full mt-3">Make an Appoinment<i
                             class="icofont-simple-right ml-2  "></i></a>
                 </div>
             </div>

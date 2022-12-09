@@ -2,11 +2,6 @@
 session_start();?>
 <?php include_once(BASE_PATH.'/part/header.php'); 
 include_once(BASE_PATH.'/telemedicine.php');
-$sql="SELECT * FROM doctor  WHERE user_id = '42'";
-$result_set=$conn->query($sql);
-
-$sql="SELECT from doctor_schedule  WHERE patient_id IS NOT NULL";
-
 #print_r($result_set);exit;
 ?>
 
@@ -20,12 +15,6 @@ $sql="SELECT from doctor_schedule  WHERE patient_id IS NOT NULL";
                 <div class="block text-center">
                     <span class="text-white">Book your Seat</span>
                     <h1 class="text-capitalize mb-5 text-lg">Appoinment</h1>
-
-                    <!-- <ul class="list-inline breadcumb-nav">
-            <li class="list-inline-item"><a href="index.html" class="text-white">Home</a></li>
-            <li class="list-inline-item"><span class="text-white">/</span></li>
-            <li class="list-inline-item"><a href="#" class="text-white-50">Book your Seat</a></li>
-          </ul> -->
                 </div>
             </div>
         </div>
@@ -49,70 +38,96 @@ $sql="SELECT from doctor_schedule  WHERE patient_id IS NOT NULL";
                 <div class="appoinment-wrap mt-5 mt-lg-0 pl-lg-5">
                     <h2 class="mb-2 title-color">Book an appoinment</h2>
                     <p class="mb-4"></p>
-                    <form class="appoinment-form" method="post" action="appointment_action.php">
+                    <?php
+                        if(isset($_GET['doctor_id']))
+                        {
+                            $id = $_GET['doctor_id'];
+                            $sql = mysqli_query($conn, "SELECT * FROM doctor_schedule WHERE doctor_id = '$id'");
+                           
+                            $get_doctor_details = mysqli_query($conn, "SELECT * FROM users, doctor WHERE users.id = doctor.user_id AND doctor.user_id = '$id'");
+                            $doctor_details = mysqli_fetch_assoc($get_doctor_details);
+                           
+                        }
+                        if (isset($_POST['search']))
+                        {
+                            $searchKey = $_POST['src'];
+                            $sql_s = "SELECT * FROM doctor_schedule WHERE shchedule_date = '$searchKey' AND patient_id IS NULL";
+
+                            $res_s = mysqli_query($conn, $sql_s);
+
+                            $rows = $res_s->num_rows;
+                        }
+                        $user_id = $_SESSION['user_id'];
+                        if(isset($_POST['appoint']))
+                        {
+                            $appointment = mysqli_query($conn, "UPDATE doctor_schedule SET patient_id = $user_id WHERE id = '$_POST[schedule]'");
+                            
+                            $create = @date('Y-m-d H:i:s');
+                            $serial_number = (rand(10,1000000));
+                            $confirm_appointment = mysqli_query($conn, "INSERT INTO appointment
+                            (patient_id, doctor_id, schedule_id, fee, status, serial_number, create_at)
+                             VALUES
+                             ('$user_id', '$id', '$_POST[schedule]', '$doctor_details[visit_fee]', '1', '$serial_number', '$create' )"
+                             );
+
+                             if ($confirm_appointment) {
+                                $last_id = mysqli_insert_id($conn);
+                                
+                                echo "<script>document.location.href='payment.php?pay=$last_id'</script>";
+                              } 
+                        }
+                    ?>
+                   
+                    <!-- <?php echo $doctor_details['visit_fee'];?> -->
+                    <form method="POST" class="appoinment-form">
                         <div class="row">
                             <div class="col-lg-6">
-                                <div class="form-group">
-
-
-                                    <select name="department" id="department-list" class="form-control" required>
-                                        <option value="">Select department</option>
-
-                                        <?php
-                                              $sql = "SELECT * FROM doctor";
-                                              $res = mysqli_query($conn, $sql);
-                                              while ($row = mysqli_fetch_assoc($res)) {
-                                                  if ($bul[$row['department']] != true && $row['department'] != 'department') {
-                                              ?>
-                                        <option value="<?php
-                                                      echo $row['department'];
-                                              ?>"><?php
-                                                      echo $row['department'];
-                                              ?></option>
-                                        <?php
-                                                      $bul[$row['department']] = true;
-                                                  }
-                                              }
-                                              ?>
-
-                                    </select>
-                                </div>
+                                <input disabled value="<?php echo $doctor_details['name']?>" class="form-control">
                             </div>
-
-
                             <div class="col-lg-6">
+                                <input disabled value="<?php echo $doctor_details['department']?>" class="form-control">
+                            </div>
+                            <div class="col-lg-6 mt-2">
                                 <div class="form-group">
-                                    <select name="name" class="form-control" id="doctor_list" required>
-
-                                        <option value="">Select date</option>
+                                    <label>Check Schedule: </label>
+                                    <select name="src" class="form-control" required>
+                                        <option value="">Select Date</option>
+                                        <?php 
+                                        $date = mysqli_query($conn, "SELECT * FROM doctor_schedule WHERE doctor_id = '$id' GROUP BY shchedule_date");
+                                        while($row = mysqli_fetch_assoc($date)){?>
+                                            <option value="<?php echo $row['shchedule_date']?>"><?php echo $row['shchedule_date']?></option>
+                                        <?php }
+                                        ?>
                                     </select>
                                 </div>
                             </div>
-
-                            <div class="col-lg-6">
-                                <div class="form-group">
-
-
-                                    <select name="name" class="form-control" id="date_list" required>
-
-                                        <option value="">Select doctor</option>
-                                    </select>
+                            <div class="col-lg-6 mt-3">
+                                <div class="form-group mt-4">
+                                    <input type="submit" class="btn btn-sm-in btn-info ml-2" name="search" value="Check Schedule">
                                 </div>
                             </div>
-
-
-                            <div class="col-lg-6">
+                        </div>
+                    </form>
+                    <form action="" method="POST">
+                        <?php
+                         if (isset($_POST['search'])== true) {
+                            if ($rows > 0) {
+                               
+                                echo "<label>Select your Schedule</label>";
+                               while($date = mysqli_fetch_assoc($res_s)){?>
                                 <div class="form-group">
-                                    <select name="time" id="time-list" class="form-control" required>
-                                        <option value="">Select time</option>
-
-
-                                    </select>
+                                    <input type="radio" name="schedule" value="<?php echo $date['id']?>"> <?php echo $date['start_time'] .' - '. $date['end_time']?>
                                 </div>
-                            </div>
-
-                            <button type="submit" class="btn btn-main btn-round-full">Make Appoinment<i
-                                    class="icofont-simple-right ml-2"></i></button>
+                               <?php }
+                               echo'
+                                <div class="form-group">
+                                <button type="submit" name="appoint" class="btn btn-main btn-round-full">Make Appoinment<i
+                                    class="icofont-simple-right ml-2"></i></button>  
+                                </div>';
+                            }
+                        }
+                        ?>
+                       
                     </form>
                 </div>
             </div>
@@ -125,55 +140,6 @@ $sql="SELECT from doctor_schedule  WHERE patient_id IS NOT NULL";
 
 <!-- footer Start -->
 <?php include_once(BASE_PATH.'/part/footer.php'); ?>
-<script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
 <script>
-$('#department-list').change(function() {
-    $.ajax({
-        type: "POST",
-        url: "doctor_list_action.php",
-        data: {'department_id':  $(this).val()},
 
-        success: function(data) {
-            $("#doctor_list").html(data);
-        }
-    });
-
-});
-
-
-$('#doctor_list').change(function() {
-    $.ajax({
-        type: "POST",
-        url: "date_list_action.php",
-        data: {'doctor_id': $(this).val()},
-
-        success: function(data) {
-            $("#date_list").html(data);
-        }
-    });
-
-});
-
-
-$('#date_list').change(function() {
-    $.ajax({
-        type: "POST",
-        url: "time_list_action.php",
-        data: {
-            'shchedule_date':  $(this).val(),
-            'doctor_id': $('#doctor_list').find(":selected").val(),
-        },
-
-        success: function(data) {
-            $("#time-list").html(data);
-        }
-    });
-
-})
-
-
-function selectRegion(val) {
-    $("#search-box").val(val);
-    $("#suggesstion-box").hide();
-}
 </script>
