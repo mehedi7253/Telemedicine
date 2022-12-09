@@ -61,8 +61,7 @@
                             <span class="badge badge-primary"></span>
                             <span class="sidebar-collapse-icon ti-angle-down"></span></a>
                         <ul>
-                            <li><a href="set_schedule.php"> Add Schedule</a></li>
-                            <li><a href="manage_schedule.php"> Manage Schedule</a></li>
+                            <li><a href="set_schedule.php"> Manage Schedule</a></li>
                         </ul>
                     </li>
                     <!-- <li>

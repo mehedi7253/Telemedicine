@@ -33,21 +33,34 @@ for($i=1;$i<=$slots;$i++){
     $end_time = strtotime("+$slot minutes", strtotime($start_time));
     $end_time = date('H:i:s', $end_time);
     
-
-
-    $sql = "INSERT INTO `doctor_schedule` (`doctor_id`,`shchedule_date`,`start_time`,`end_time`) 
-    VALUES ('$doctor_id','$shchedule_date','$start_time','$end_time')";
-//    print($sql);exit;
-    $start_time = $end_time;
-                    
-    if($conn->query($sql)) 
+    $sql_check = "SELECT * FROM doctor_schedule WHERE shchedule_date = '$shchedule_date' AND start_time = '$start_time' AND doctor_id = '$doctor_id'";
+    $chck = mysqli_query($conn, $sql_check);
+    
+    if(mysqli_num_rows($chck) > 0)
     {
-        $msg= "  Schedule added Sucessfully " ;
-    }	
-    else
-    {
-        $msg= " Error: ".$conn->error;
+        $_SESSION['exist'] = "<h6 class='text-danger'>This Schedule Allready Added..! </h6>";
+    }else{
+        $sql = mysqli_query($conn,"INSERT INTO doctor_schedule (doctor_id,shchedule_date,start_time,end_time) 
+        VALUES ('$doctor_id','$shchedule_date','$start_time','$end_time')");
+    //    print($sql);exit;
+        $start_time = $end_time;
+
+        $msg= "Schedule added Sucessfully " ;
+
+        // if($conn->query($sql)) 
+        // {
+           
+        // }	
+        // else
+        // {
+        //     $msg= " Error: ".$conn->error;
+        // }
+       
     }
+
+   
+                    
+    
 
 }
 

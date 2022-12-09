@@ -1,35 +1,31 @@
-<?php include_once('../config.php');
+<?php include_once('../config.php'); 
 session_start();
-if (!$_SESSION['backenduser']) {
-    header('location:../index.php');
+if(!$_SESSION['backenduser']){
+   header('location:../index.php'); 
 }
-?>
-<?php include_once(BASE_PATH . '/Admin/partial/header.php');
-include_once(BASE_PATH . '/telemedicine.php');
-
-$doctor_id = $_SESSION['user_id'];
-$sql = "SELECT * FROM users WHERE id = $doctor_id";
-$result_set = $conn->query($sql);
-
-$doctor = mysqli_fetch_assoc($result_set);
+$doctor_id = $_SESSION ['user_id'];
+ include_once(BASE_PATH.'/Admin/partial/header.php'); 
+include_once(BASE_PATH.'/telemedicine.php');
+$sql="select * from doctor_schedule WHERE doctor_id = $doctor_id ";
+$result_set=$conn->query($sql);
+#print_r($result_set);exit;
 ?>
 
-<?php include_once(BASE_PATH . '/Admin/partial/header.php'); ?>
 
-<?php include_once(BASE_PATH . '/Admin/partial/sidebar.php'); ?>
+<?php include_once(BASE_PATH.'/Admin/partial/sidebar.php'); ?>
 <!-- /# sidebar -->
-<?php include_once(BASE_PATH . '/Admin/partial/topnav.php'); ?>
 
-
+<?php include_once(BASE_PATH.'/Admin/partial/topnav.php'); ?>
 
 <div class="content-wrap">
     <div class="main">
         <div class="container-fluid">
+
             <div class="row">
                 <div class="col-lg-8 p-r-0 title-margin-right">
                     <div class="page-header">
                         <div class="page-title">
-                            <h1>Add Schedule</h1>
+                            <h1>Hello, <span>Manage Schedule</span></h1>
                         </div>
                     </div>
                 </div>
@@ -38,133 +34,166 @@ $doctor = mysqli_fetch_assoc($result_set);
                     <div class="page-header">
                         <div class="page-title">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item">
-                                    <a href="#">Dashboard</a>
-                                </li>
-                                <li class="breadcrumb-item active">Add Schedule</li>
+                                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                                <li class="breadcrumb-item active">Manage Schedule</li>
                             </ol>
                         </div>
                     </div>
                 </div>
                 <!-- /# column -->
             </div>
-
             <!-- /# row -->
             <section id="main-content">
                 <div class="row">
-                    <div class="col-lg-8 mx-auto">
+                    <div class="col-lg-12">
                         <div class="card">
-                            <div class="card-body">
-                                <?php
-                                   
-                                    if(isset($_POST['btn']))
-                                    {
-                                        $schedule_date = $_POST['schedule_date'];
-                                        $schedule_time = $_POST['schedule_time'];
+                            <?php
+                                if (isset ($_SESSION['exist'])) 
+                                {
+                                    echo $_SESSION['exist'];
+                                    unset($_SESSION['exist']);
+                                } 
+                            ?>
+                            <div class="bootstrap-data-table-panel">
+                                <div class="table-responsive">
+                                    <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
+                                        <div class="float-right">
+                                            <button class="button" id="add_schedule_btn" data-modal="schedule_modal">
+                                                 <span class="ti-plus"> Add schedule </span>
+                                            </button>
+                                        </div>
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Date</th>
+                                                <th>Start time</th>
+                                                <th>End time</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
 
-                                        if($schedule_date == ' ')
-                                        {
-                                            echo "<p class='text-danger'>Please Enter Date</p>";
-                                        }elseif($schedule_time == ''){
-                                            echo "<p class='text-danger'>Please Select Time</p>";
-                                        }else{
-                                            $sql_check = "SELECT * FROM doctor_schedules WHERE schedule_date = '$schedule_date' AND schedule_time = '$schedule_time' AND doctor_id = '$doctor_id'";
-                                            $chck = mysqli_query($conn, $sql_check);
-                                            
-                                            if(mysqli_num_rows($chck) > 0)
-                                            {
-                                                echo "<p class='text-danger'>This Schedule Allready Added..! </p>";
-                                            }else{
-                                                $add_schedule = "INSERT INTO doctor_schedules 
-                                                            (schedule_date, schedule_time, doctor_id)
-                                                            VALUES ('$schedule_date', '$schedule_time', '$doctor_id')";
-                                                $res = mysqli_query($conn, $add_schedule);
+                                            <?php $i = 1; foreach($result_set as $doctor_schedule){?>
+                                            <tr>
+                                                <td><?php echo $i++; ?></td>
+                                                <td><?=$doctor_schedule['shchedule_date']?></td>
+                                                <td><?=$doctor_schedule['start_time']?></td>
+                                                <td><?=$doctor_schedule['end_time']?></td>
+                                                <td>
+                                                    <a class="btn btn-danger text-white" href="delete.php?delete_schedule=<?php echo $doctor_schedule['id']?>" onclick="return confirm('Are You Sure To Delete..!')"><i class="fa fa-trash-o"></i> Delete</a>
+                                                </td>
+                                            </tr>
+                                            <?php }?>
 
-                                                echo "<h4 class='text-success'>Schedule Added Successfull.!</h4>";
-                                            }
-                                           
-
-                                        }
-                                        
-                                        
-                                    }
-                                ?>
-                                <form action="" method="POST" enctype="multipart/form-data">
-                                    <div class="form-group">
-                                        <label>Schedule Date</label>
-                                        <input type="date" name="schedule_date" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Schedule Slot</label>
-                                        <select class="form-control" name="schedule_time">
-                                            <option>-----------Select Schedule Time----------</option>
-                                            <?php
-                                                $sql_check = "SELECT * FROM doctor_schedules WHERE doctor_id = $doctor_id";
-                                                $chck = mysqli_query($conn, $sql_check);
-                                            ?>
-                                           
-                                            <option value="10.00 AM - 12.00 PM"> 10.00 AM - 12.00 PM </option>
-                                            <option value="12.00 PM - 2.00 PM"> 12.00 PM - 2.00 PM </option>
-                                            <option value="2.00 PM - 4.00 PM"> 2.00 PM - 4.00 PM </option>
-                                            <option value="4.00 PM - 6.00 PM"> 4.00 PM - 6.00 PM </option>
-                                            <option value="6.00 PM - 8.00 PM"> 6.00 PM - 8.00 PM </option>
-                                            <option value="8.00 PM - 10.00 PM"> 18.00 PM - 10.00 PM </option>
-                                            <option value="10.00 PM - 12.00 AM"> 10.00 PM - 12.00 AM </option>
-                                        </select>
-
-                                        
-                                    </div>
-                                    <div class="form-group  col-md-12 float-left">
-                                        <input type="submit" name="btn" class="btn btn-success">
-                                    </div>
-                                </form>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
+                        </div>
+                        <!-- /# card -->
+                    </div>
+                    <!-- /# column -->
+
+                </div>
+
+
+
+
+
+                <?php include_once(BASE_PATH.'/Admin/partial/popup_css.php'); ?>
+
+
+
+                <div id="schedule_modal" class="modal">
+                    <div class="modal-content modal-fodal">
+                        <div class="contact-form">
+                            <span class="close">&times;</span>
+
+                            <form action="schedule_action.php" class="form-horizontal" method="POST">
+
+                                <div class="form-group">
+                                    <label>Date</label>
+                                    <input name="shchedule_date" id="schedule_date" type="date" class="form-control"
+                                        placeholder="" required>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Start Time</label>
+                                    <input name="start_time" type="time" class="form-control schedule_time" placeholder="" 
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <label>End Time</label>
+                                    <input name="end_time" type="time" class="form-control schedule_time" placeholder="Time" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Consulting time</label>
+                                    <select class="form-control" name="slot" required>
+                                        <option>5</option>
+                                        <option>10 </option>
+                                        <option>15 </option>
+                                        <option>20 </option>
+                                        <option>25 </option>
+                                        <option>30 </option>
+                                        <option>35 </option>
+                                        <option>40 </option>
+                                        <option>45 </option>
+                                        <option>50 </option>
+                                        <option>55 </option>
+                                        <option>60 </option>
+                                        <option>65 </option>
+                                        <option>70 </option>
+                                        <option>75 </option>
+                                        <option>80 </option>
+                                        <option>85 </option>
+                                        <option>90 </option>
+                                        <option>95 </option>
+                                        <option>100</option>
+                                        <option>115</option>
+                                    </select>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">Done</button>
+                            </form>
                         </div>
                     </div>
                 </div>
-                <!-- /# row -->
 
-                <!-- /# column -->
+                <script>
 
-                <!-- /# column -->
+
+                let modalBtns = [...document.querySelectorAll(".button")];
+                modalBtns.forEach(function(btn) {
+                    btn.onclick = function() {
+                        let modal = btn.getAttribute("data-modal");
+                        document.getElementById(modal).style.display = "block";
+                    };
+                });
+                let closeBtns = [...document.querySelectorAll(".close")];
+                closeBtns.forEach(function(btn) {
+                    btn.onclick = function() {
+                        let modal = btn.closest(".modal");
+                        modal.style.display = "none";
+                    };
+                });
+                window.onclick = function(event) {
+                    if (event.target.className === "modal") {
+                        event.target.style.display = "none";
+                    }
+                };
+
+                </script>
+
+
+
         </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="footer">
-                    <p>2022 © Admin Board. -
-                        <a href="#">example.com</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-        </section>
     </div>
+
+    </section>
 </div>
 </div>
+</div>
 
-
-
-
-
-
-
-<!-- Common -->
-<script src="js/lib/jquery.min.js"></script>
-<script src="js/lib/jquery.nanoscroller.min.js"></script>
-<script src="js/lib/menubar/sidebar.js"></script>
-<script src="js/lib/preloader/pace.min.js"></script>
-<script src="js/lib/bootstrap.min.js"></script>
-<script src="js/scripts.js"></script>
-<script>
-     var today = new Date().toISOString().split('T')[0];
-        document.getElementsByName("schedule_date")[0].setAttribute('min', today);
-        var timeOptions = {
-            'timeFormat': 'h:i A',
-            'minTime': getCurrentTime(new Date())
-        };
-
-        
-</script>
-</body>
-
-</html>
+<?php include_once(BASE_PATH.'/Admin/partial/footer.php'); ?>
