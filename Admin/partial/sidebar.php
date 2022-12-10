@@ -33,13 +33,43 @@
 
                 <?php if ($_SESSION['user_role'] == 1) { ?>
 
+                    <li>
+                        <a class="sidebar-sub-toggle"><i class="ti-home2"></i> Manage Doctor
+                            <span class="badge badge-primary"></span>
+                            <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                        <ul>
+                            <li><a href="add_doctor.php"> Add Doctor</a></li>
+                            <li><a href="doctor_list.php">Manage Doctor</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="sidebar-sub-toggle"><i class="ti-home2"></i> Manage Pharmaceutical
+                            <span class="badge badge-primary"></span>
+                            <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                        <ul>
+                            <li><a href="add_pharmaceutical.php"> Add Pharmaceutical</a></li>
+                            <li><a href="pharmaceutical_list.php">Manage Pharmaceutical</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="sidebar-sub-toggle"><i class="ti-home2"></i> Manage Blog
+                            <span class="badge badge-primary"></span>
+                            <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                        <ul>
+                            <li><a href="add_blog.php"> Add Blog</a></li>
+                            <li><a href="manage_blog.php">Manage Blog</a></li>
+                        </ul>
+                    </li>
+                    <!-- <li><a class="sidebar-sub-toggle" href="client_list.php"><i class="ti-target"></i> Manage Client </a> -->
 
+                    
+<!-- 
                     <li><a href="add_doctor.php">ADD Doctors</a></li>
                     <li><a href="add_pharmaceutical.php">ADD Pharmaceutical</a></li>
                     <li><a href="doctor_list.php">Doctors</a></li>
                     <li><a href="client_list.php">client</a></li>
                     <li><a href="pharmaceutical_list.php">Paharmaceutical List</a></li>
-                    <li><a href="blog.php">blog</a></li>
+                    <li><a href="blog.php">blog</a></li> -->
 
 
                 <?php } ?>

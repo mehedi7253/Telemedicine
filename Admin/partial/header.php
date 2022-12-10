@@ -39,8 +39,9 @@
     <link rel="" href="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"> 
     <link rel="" href="https://cdn.datatables.net/responsive/2.4.0/js/responsive.bootstrap4.min.js"> 
     
-  
-   
+    <script src="https://cdn.ckeditor.com/4.20.1/standard/ckeditor.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+
 
 </head>
 

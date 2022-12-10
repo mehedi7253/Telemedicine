@@ -38,7 +38,7 @@
 <script src="<?=BASE_URL ?>Admin/js/pr.js"></script>
 <script src="<?=BASE_URL ?>Admin/js/sweetalert.min.js"></script>
 
-
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
 
 
 <?php 
@@ -82,7 +82,7 @@ swal({
         let todayDate = todayDateTime.toISOString().split("T")[0];
 
         $("#schedule_modal #schedule_date").attr('min', todayDate);
-        $("#schedule_modal .schedule_time").attr('min', `${currentHour}:${currentMin}`);
+        // $("#schedule_modal .schedule_time").attr('min', `${currentHour}:${currentMin}`);
 
 </script>
 </body>

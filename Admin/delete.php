@@ -20,4 +20,13 @@ if (isset($_GET['delete_schedule'])){
 }
 
 
+if (isset($_GET['blogID'])){
+    $blog_id = $_GET['blogID'];
+
+    $sql = $conn->query("DELETE FROM blogs WHERE id = $blog_id");
+
+    $_SESSION['message'] = 'Remove Successful';
+    header('Location: manage_blog.php');
+}
+
 ?>

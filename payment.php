@@ -48,7 +48,7 @@ include_once(BASE_PATH.'/telemedicine.php');
                         <div class="mt-5">
                             <p class="text-white text-center">Your bkash Account number</p>
                             <form action="" method="POST">
-                                <input type="text" name="account_number" class="form-control col-md-7 mx-auto" placeholder="e.g 01XXXXXXXXX">
+                                <input type="text" name="account_number" class="form-control col-md-7 mx-auto" placeholder="e.g 01XXXXXXXXX" required>
                                 <div class="col-md-7 mx-auto mt-3">
                                     <input type="submit" name="bkas" class="btn btn-secondary col-6" value="Proceed">
                                 </div>

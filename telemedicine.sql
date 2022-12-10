@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 05, 2022 at 06:14 AM
--- Server version: 10.4.18-MariaDB
--- PHP Version: 8.0.3
+-- Generation Time: Dec 10, 2022 at 06:48 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,17 +24,95 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `blog_post`
+-- Table structure for table `appointment`
 --
 
-CREATE TABLE `blog_post` (
+CREATE TABLE `appointment` (
   `id` int(11) NOT NULL,
-  `title` varchar(2000) NOT NULL,
-  `description` varchar(10000) NOT NULL,
-  `post_date` date NOT NULL,
+  `patient_id` int(11) NOT NULL,
+  `doctor_id` int(11) NOT NULL,
+  `schedule_id` int(11) NOT NULL,
+  `fee` varchar(255) NOT NULL,
+  `status` int(10) NOT NULL,
+  `create_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `serial_number` varchar(255) DEFAULT NULL,
+  `account_number` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `appointment`
+--
+
+INSERT INTO `appointment` (`id`, `patient_id`, `doctor_id`, `schedule_id`, `fee`, `status`, `create_at`, `serial_number`, `account_number`) VALUES
+(13, 43, 42, 65, '45', 1, '2022-12-09 18:41:30', '265247', '01941697253'),
+(14, 43, 42, 72, '500', 1, '2022-12-10 15:45:16', '42567', '01866717285'),
+(15, 43, 42, 70, '500', 1, '2022-12-10 15:59:41', '193243', '01941697253'),
+(17, 43, 42, 75, '500', 1, '2022-12-10 17:05:11', '545118', '01234569');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blogs`
+--
+
+CREATE TABLE `blogs` (
+  `id` int(11) NOT NULL,
+  `blog_title` varchar(255) NOT NULL,
+  `description` longtext NOT NULL,
+  `blog_image` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `blogs`
+--
+
+INSERT INTO `blogs` (`id`, `blog_title`, `description`, `blog_image`) VALUES
+(5, 'test blog', '<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum dolore amet magnam aliquid neque harum ex. Ad veritatis delectus ratione deleniti distinctio facilis nemo consequatur quo, minima, provident temporibus aspernatur!Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum dolore amet magnam aliquid neque harum ex. Ad veritatis delectus ratione deleniti distinctio facilis nemo consequatur quo, minima, provident temporibus aspernatur!Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum dolore amet magnam aliquid neque harum ex. Ad veritatis delectus ratione deleniti distinctio facilis nemo consequatur quo, minima, provident temporibus aspernatur!Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum dolore amet magnam aliquid neque harum ex. Ad veritatis delectus ratione deleniti distinctio facilis nemo consequatur quo, minima, provident temporibus aspernatur!Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum dolore amet magnam aliquid neque harum ex. Ad veritatis delectus ratione deleniti distinctio facilis nemo consequatur quo, minima, provident temporibus aspernatur!Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum dolore amet magnam aliquid neque harum ex. Ad veritatis delectus ratione deleniti distinctio facilis nemo consequatur quo, minima, provident temporibus aspernatur!Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum dolore amet magnam aliquid neque harum ex. Ad veritatis delectus ratione deleniti distinctio facilis nemo consequatur quo, minima, provident temporibus aspernatur!Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum dolore amet magnam aliquid neque harum ex. Ad veritatis delectus ratione deleniti distinctio facilis nemo consequatur quo, minima, provident temporibus aspernatur!Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum dolore amet magnam aliquid neque harum ex. Ad veritatis delectus ratione deleniti distinctio facilis nemo consequatur quo, minima, provident temporibus aspernatur!Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum dolore amet magnam aliquid neque harum ex. Ad veritatis delectus ratione deleniti distinctio facilis nemo consequatur quo, minima, provident temporibus aspernatur!Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum dolore amet magnam aliquid neque harum ex. Ad veritatis delectus ratione deleniti distinctio facilis nemo consequatur quo, minima, provident temporibus aspernatur!Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum dolore amet magnam aliquid neque harum ex. Ad veritatis delectus ratione deleniti distinctio facilis nemo consequatur quo, minima, provident temporibus aspernatur!Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum dolore amet magnam aliquid neque harum ex. Ad veritatis delectus ratione deleniti distinctio facilis nemo consequatur quo, minima, provident temporibus aspernatur!Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum dolore amet magnam aliquid neque harum ex. Ad veritatis delectus ratione deleniti distinctio facilis nemo consequatur quo, minima, provident temporibus aspernatur!</p>\r\n', 'images/blogs/1.jpg'),
+(8, 'sdfsd', '<p>asasfasdfadfsd</p>\r\n', 'images/blogs/bb.PNG');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blog_comment`
+--
+
+CREATE TABLE `blog_comment` (
+  `id` int(11) NOT NULL,
+  `blog_id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `comment` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `blog_comment`
+--
+
+INSERT INTO `blog_comment` (`id`, `blog_id`, `user_id`, `comment`) VALUES
+(1, 5, 43, 'test'),
+(2, 5, 42, 'test 2'),
+(3, 5, 43, 'gb');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blog_like_unlike`
+--
+
+CREATE TABLE `blog_like_unlike` (
+  `like_id` int(11) NOT NULL,
+  `blog_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `post_img` varchar(3000) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `like_unlike` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `blog_like_unlike`
+--
+
+INSERT INTO `blog_like_unlike` (`like_id`, `blog_id`, `user_id`, `like_unlike`) VALUES
+(11, 6, 43, 1),
+(12, 5, 43, 1),
+(13, 8, 43, 0);
 
 -- --------------------------------------------------------
 
@@ -49,7 +127,7 @@ CREATE TABLE `doctor` (
   `department` varchar(3000) NOT NULL,
   `specialization` varchar(2000) NOT NULL,
   `visit_fee` int(12) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `doctor`
@@ -65,7 +143,7 @@ INSERT INTO `doctor` (`id`, `user_id`, `name`, `department`, `specialization`, `
 (34, 39, 'Heidi Ward', 'Gianologist', 'Diabetes', 65),
 (35, 40, 'Duncan Benton', 'Dental', 'Diabetes, Thyroid', 7),
 (36, 41, 'Conan Pratt', 'Radiology', 'Hormone', 5),
-(37, 42, 'Rhea Howe', 'Neurology', 'Medicine, Thyroid', 45),
+(37, 42, 'Mehedi', 'Neurology', 'Medicine, Thyroid', 500),
 (40, 51, 'Ori Chaney', 'Neurology', 'Diabetes, Thyroid, Hormone', 31),
 (41, 52, 'Carolyn Aguirre', 'Dental', 'Hormone', 53),
 (42, 53, 'Colorado Golden', 'Traumatology', 'Medicine, Diabetes, Hormone', 32),
@@ -75,7 +153,8 @@ INSERT INTO `doctor` (`id`, `user_id`, `name`, `department`, `specialization`, `
 (46, 58, 'Lillian Rojas', 'Radiology', 'Medicine, Thyroid, Hormone', 14),
 (47, 60, 'Eric Church', 'Radiology', 'Medicine, Diabetes', 27),
 (48, 61, 'Cameran Diaz', 'Medicine', 'Medicine, Diabetes, Thyroid, Hormone', 43),
-(49, 62, 'Beverly Sloan', 'Gianologist', 'Hormone', 68);
+(49, 62, 'Beverly Sloan', 'Gianologist', 'Hormone', 68),
+(50, 63, 'test', 'Psychiatrist', 'Medicine, Diabetes', 500);
 
 -- --------------------------------------------------------
 
@@ -90,19 +169,25 @@ CREATE TABLE `doctor_schedule` (
   `shchedule_date` date DEFAULT NULL,
   `start_time` time DEFAULT NULL,
   `end_time` time DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `doctor_schedule`
 --
 
 INSERT INTO `doctor_schedule` (`id`, `doctor_id`, `patient_id`, `shchedule_date`, `start_time`, `end_time`) VALUES
-(1, 42, 43, '2022-11-17', '16:00:00', '16:30:00'),
-(3, 51, NULL, '2022-11-19', '23:25:00', '23:40:00'),
-(4, 51, NULL, '2022-11-19', '23:40:00', '23:55:00'),
-(5, 42, 48, '2022-11-20', '22:00:00', '22:20:00'),
-(6, 42, NULL, '2022-11-20', '22:20:00', '22:40:00'),
-(7, 42, NULL, '2022-11-20', '22:40:00', '23:00:00');
+(89, 42, NULL, '2022-12-11', '12:34:00', '12:39:00'),
+(90, 42, NULL, '2022-12-11', '12:39:00', '12:44:00'),
+(91, 42, NULL, '2022-12-11', '12:44:00', '12:49:00'),
+(92, 42, NULL, '2022-12-11', '12:49:00', '12:54:00'),
+(93, 42, NULL, '2022-12-11', '12:54:00', '12:59:00'),
+(94, 42, NULL, '2022-12-12', '13:36:00', '14:21:00'),
+(95, 42, NULL, '2022-12-12', '14:21:00', '15:06:00'),
+(96, 42, NULL, '2022-12-13', '10:30:00', '10:50:00'),
+(97, 42, NULL, '2022-12-13', '10:50:00', '11:10:00'),
+(98, 42, NULL, '2022-12-13', '11:10:00', '11:30:00'),
+(99, 42, NULL, '2022-12-13', '11:30:00', '11:50:00'),
+(100, 42, NULL, '2022-12-13', '11:50:00', '12:10:00');
 
 -- --------------------------------------------------------
 
@@ -116,7 +201,7 @@ CREATE TABLE `medicines` (
   `brand_name` varchar(2000) NOT NULL,
   `generic_name` varchar(2000) NOT NULL,
   `type` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `medicines`
@@ -131,7 +216,8 @@ INSERT INTO `medicines` (`id`, `user_id`, `brand_name`, `generic_name`, `type`) 
 (14, 0, 'Lewis Odonnell', 'Hanae Ortega', 'Tablet'),
 (15, 0, 'James Evans', 'Jonas Barber', 'syrup'),
 (16, 44, 'Kennedy Garza', 'Eugenia Rhodes', 'Tablet'),
-(17, 45, 'Gretchen Ray', 'Raya Hernandez', 'Tablet');
+(17, 45, 'Gretchen Ray', 'Raya Hernandez', 'Tablet'),
+(18, 44, 'Napa', 'test', 'Tablet');
 
 -- --------------------------------------------------------
 
@@ -144,7 +230,7 @@ CREATE TABLE `post_comment` (
   `post_id` int(11) NOT NULL,
   `details` varchar(10000) NOT NULL,
   `user_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -154,13 +240,12 @@ CREATE TABLE `post_comment` (
 
 CREATE TABLE `prescription` (
   `id` int(11) NOT NULL,
-  `prescription_date` date NOT NULL,
-  `patient_id` int(11) NOT NULL,
-  `doctor_id` int(11) NOT NULL,
-  `advice` varchar(2000) NOT NULL,
-  `test` varchar(3000) NOT NULL,
-  `symptom` varchar(2000) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `appointment_id` int(11) NOT NULL,
+  `symptoms` varchar(255) DEFAULT NULL,
+  `test` varchar(255) DEFAULT NULL,
+  `advice` varchar(255) DEFAULT NULL,
+  `prescription` longtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -174,7 +259,7 @@ CREATE TABLE `prescription_medicine` (
   `frequency` varchar(2000) NOT NULL,
   `instruction` varchar(3000) NOT NULL,
   `prescription_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -191,39 +276,46 @@ CREATE TABLE `users` (
   `dob` date DEFAULT NULL,
   `role` int(12) NOT NULL COMMENT '0-paitient,1-admin,2-doctor,3-medcomp\r\n',
   `image` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `phone`, `dob`, `role`, `image`) VALUES
-(39, 'Heidi Ward', 'byras@mailinator.com', 'Pa$$w0rd!', '+1 (472) 897-9499', '2009-06-23', 2, '2.jpg'),
-(40, 'Duncan Benton', 'disale@mailinator.com', 'Pa$$w0rd!', '+1 (772) 451-8141', '2011-02-07', 2, '1.jpg'),
-(42, 'Rhea Howe', 'hola@gmail.com', '202cb962ac59075b964b07152d234b70', '+1 (566) 706-4926', '1990-12-12', 2, '3.jpg'),
-(43, 'Willa Chavez', 'mif@gmail.com', '202cb962ac59075b964b07152d234b70', '+1 (731) 402-2944', '2001-01-20', 0, 'images/users/2.jpg'),
-(44, 'Steven Hood', 'del@gmail.com', '202cb962ac59075b964b07152d234b70', '+1 (175) 453-7831', NULL, 3, ''),
-(45, 'Vera Pitts', 'bul@gmail.com', '202cb962ac59075b964b07152d234b70', '+1 (717) 365-6539', NULL, 3, ''),
-(46, 'Xyca Roberts', 'xyca@gmail.com', '202cb962ac59075b964b07152d234b70', '+1 (835) 474-4254', '1975-09-17', 2, 'doc1.jpg'),
-(47, 'Jack Dotson', 'vat@gmail.com', '202cb962ac59075b964b07152d234b70', '+1 (732) 927-4614', '2002-12-02', 0, 'images/users/online-doctor-.jpg'),
-(48, 'mysha Tamanna', '1001012@daffodil.ac', '202cb962ac59075b964b07152d234b70', '(01) 85998-3081', '2022-11-16', 0, '3.jpg'),
-(49, 'Mysha', 'mysha@gmail.com', '202cb962ac59075b964b07152d234b70', '01859983081', '2022-11-13', 1, 'images/users/IMG_2532.JPG'),
-(50, 'Shea Bolton', 'fake@gmail.com', '202cb962ac59075b964b07152d234b70', '+1 (446) 577-3749', '1997-05-15', 0, 'images/users/slider-bg-1.jpg'),
-(51, 'Ori Chaney', 'Ori@gmail.com', '202cb962ac59075b964b07152d234b70', '+1 (521) 635-1959', '2000-07-28', 2, 'telemedicine.jpg'),
-(53, 'Colorado Golden', 'rivyva@mailinator.com', '202cb962ac59075b964b07152d234b70', '+1 (573) 336-2806', '1983-11-20', 2, 'slider-bg-1.jpg'),
-(54, 'Sandra Klein', 'poqu@mailinator.com', '202cb962ac59075b964b07152d234b70', '+1 (881) 381-8043', NULL, 3, ''),
-(55, 'Ivory Rutledge', 'puwimaku@mailinator.com', '202cb962ac59075b964b07152d234b70', '+1 (613) 789-3827', '1984-03-05', 2, '1.png'),
-(56, 'Rinah Bradshaw', 'peqita@mailinator.com', '202cb962ac59075b964b07152d234b70', '+1 (115) 753-7252', '1989-01-03', 2, 'blank-profile-picture-.png'),
-(57, 'Chantale Mclaughlin', 'vahubikax@mailinator.com', '202cb962ac59075b964b07152d234b70', '+1 (236) 634-1301', '1974-08-22', 2, 'blank-profile-picture-.png'),
-(58, 'Lillian Rojas', 'ratevoqaq@mailinator.com', '202cb962ac59075b964b07152d234b70', '+1 (509) 503-8324', '2021-03-20', 2, 'doctor.png'),
-(59, 'Adele Cross', 'Adele@gmail.com', '202cb962ac59075b964b07152d234b70', '+1 (154) 925-2798', '1986-09-28', 0, 'images/users/favicon.png'),
-(60, 'Eric Church', 'jukysoqysi@mailinator.com', 'f3ed11bbdb94fd9ebdefbaf646ab94d3', '+1 (922) 475-5861', '2013-10-22', 2, '5539610.jpg'),
-(61, 'Cameran Diaz', 'fugizufy@mailinator.com', 'f3ed11bbdb94fd9ebdefbaf646ab94d3', '+1 (146) 277-8602', '2020-04-01', 2, '5539610.jpg'),
-(62, 'Beverly Sloan', 'wufum@mailinator.com', 'f3ed11bbdb94fd9ebdefbaf646ab94d3', '+1 (325) 903-6925', '2013-08-27', 2, '5539610.jpg');
+(42, 'Mehedi Hasan', 'doctor@gmail.com', '09236968fe179eba9959ee08bb5bf80f', '01941697253', '1997-12-12', 2, 'IlMgnNvKli.jpeg'),
+(43, 'user', 'user@gmail.com', '202cb962ac59075b964b07152d234b70', '018667178254', '1997-12-12', 0, 'images/users/10e0a246-a793-4f45-8462-567d0f5561131568193468366-Deewa-Printed-Jumpsuit-1581568193467754-5.jpg'),
+(44, 'Steven Hood', 'pharma@gmail.com', '202cb962ac59075b964b07152d234b70', '+1 (175) 453-7831', NULL, 3, ''),
+(49, 'Mysha', 'admin@gmail.com', '202cb962ac59075b964b07152d234b70', '01859983081', '2022-11-13', 1, 'images/users/IMG_2532.JPG'),
+(63, 'test', 'test@gmail.com', '202cb962ac59075b964b07152d234b70', '12345', '1996-12-12', 2, 'IlMgnNvKli.jpeg');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `appointment`
+--
+ALTER TABLE `appointment`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `blogs`
+--
+ALTER TABLE `blogs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `blog_comment`
+--
+ALTER TABLE `blog_comment`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `blog_like_unlike`
+--
+ALTER TABLE `blog_like_unlike`
+  ADD PRIMARY KEY (`like_id`);
 
 --
 -- Indexes for table `doctor`
@@ -266,22 +358,46 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `appointment`
+--
+ALTER TABLE `appointment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT for table `blogs`
+--
+ALTER TABLE `blogs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `blog_comment`
+--
+ALTER TABLE `blog_comment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `blog_like_unlike`
+--
+ALTER TABLE `blog_like_unlike`
+  MODIFY `like_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
 -- AUTO_INCREMENT for table `doctor`
 --
 ALTER TABLE `doctor`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `doctor_schedule`
 --
 ALTER TABLE `doctor_schedule`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
 -- AUTO_INCREMENT for table `medicines`
 --
 ALTER TABLE `medicines`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `prescription`
@@ -299,7 +415,7 @@ ALTER TABLE `prescription_medicine`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

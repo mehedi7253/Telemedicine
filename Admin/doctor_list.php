@@ -6,7 +6,7 @@ if(!$_SESSION['backenduser']){
 ?>
 <?php include_once(BASE_PATH.'/Admin/partial/header.php'); 
 include_once(BASE_PATH.'/telemedicine.php');
-$sql="SELECT doctor.name,email,users.image as img,department,specialization,visit_fee
+$sql="SELECT users.id as UserID,doctor.id as DoctorID,doctor.name,email,users.image as img,department,specialization,visit_fee
 FROM doctor
 INNER JOIN users
 ON doctor.user_id = users.id";
@@ -55,11 +55,9 @@ $result_set=$conn->query($sql);
                 <section id="main-content">
             
                 <div class="row">
-
-                
-
                         <div class="col-lg-12">
                             <div class="card">
+                           
                                 <div class="bootstrap-data-table-panel">
                                     <div class="table-responsive">
                                         <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
@@ -84,10 +82,9 @@ $result_set=$conn->query($sql);
                                                     <td><?=$doctor['visit_fee']?></td>
                                                     <td><?=$doctor['specialization']?></td>
                                                     <td>
-                                                        <button type="button" class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5"><i class="fa fa-pencil"></i>Upadate</button>
-                                                        <button type="button" class="btn btn-danger btn-flat btn-addon m-b-10 m-l-5"><i class="fa fa-trash-o"></i>Delete</button>
-                                                    </td>
-                                                
+                                                        <a href="doctor_edit.php?docotrID=<?php echo $doctor['DoctorID']?>" class="btn btn-info btn-flat btn-addon m-b-10 m-l-5"><i class="fa fa-edit"></i> Edit</a>
+                                                        <!-- <a class="btn btn-danger btn-flat btn-addon m-b-10 m-l-5" href="delete.php?delete_doctor=<?php echo $doctor['UserID']?>"><i class="fa fa-trash-o"></i>Delete</a> -->
+                                                    </td>     
                                                 </tr>
                                                 
                                         <?php }?>
@@ -99,10 +96,7 @@ $result_set=$conn->query($sql);
                             <!-- /# card -->
                         </div>
                         <!-- /# column -->
-
                     </div>
-                    
-
                 </section>
             </div>
         </div>
