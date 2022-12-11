@@ -64,7 +64,13 @@ include_once(BASE_PATH . '/telemedicine.php');
                                 foreach ($prescription as $chkNew1) {
                                     $chkNew .= $chkNew1 . ", ";
                                 }
-                                $addmed = mysqli_query($conn, "INSERT INTO prescription (appointment_id, prescription) values ('$_SESSION[user_id]', '$chkNew')");
+                                $addmed = mysqli_query($conn, "INSERT INTO prescription (appointment_id, symptoms, test, advice, prescription) values ('$id', '$symptoms', '$test', '$advice', '$chkNew')");
+                                $_SESSION['message'] = "Prescription Generate Successfull";
+
+                                if($addmed)
+                                {
+
+                                }
                             }
                             ?>
                             <div class="col-md-12 col-sm-12 float-left">
@@ -91,7 +97,7 @@ include_once(BASE_PATH . '/telemedicine.php');
                                     </div>
                                     <div class="form-group col-md-12 float-left">
                                         <label>Enter Medicine</label>
-                                        <select name="prescription[]" data-placeholder="Select Medicine" multiple class="chosen-select col-md-12" tabindex="8">
+                                        <select name="prescription[]" required data-placeholder="Select Medicine" multiple class="chosen-select col-md-12" tabindex="8">
                                             <?php
                                             while ($medicinice = mysqli_fetch_assoc($sql)) { ?>
                                                 <option value="<?php echo $medicinice['brand_name'] ?>"><?php echo $medicinice['brand_name'] ?> </option>
@@ -100,7 +106,7 @@ include_once(BASE_PATH . '/telemedicine.php');
                                         </select>
                                     </div>
                                     <div class="form-group col-md-12 float-left">
-                                        <input type="submit" class="btn btn-success" value="Submit" name="btn">
+                                        <input type="submit" class="btn btn-success" value="Generate Prescription" name="btn">
                                     </div>
                                 </form>
                             </div>
