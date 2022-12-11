@@ -32,7 +32,6 @@ $user = mysqli_fetch_assoc($result_set);
                         <i class="ico-home"></i> <a href="change_pass.php">Change Password</a><br/>
                         <i class="ico-home"></i> <a href="change_profile_pic.php">Update Profile Picture</a><br/>
                         <i class="ico-home"></i> <a href="appointment_list.php">Appointment List</a><br/>
-                        <i class="fa-file-text"></i> <a href="profile.php">Prescription List</a><br/>
                     </div>
                 </div>
             </div>
@@ -53,6 +52,7 @@ $user = mysqli_fetch_assoc($result_set);
                                         <th>Start Time</th>
                                         <th>End Time</th>
                                         <th>Status</th>
+                                        <th>Prescription</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -80,6 +80,19 @@ $user = mysqli_fetch_assoc($result_set);
                                                         echo '<span class="text-succsess">Complete</span>';
                                                     }
                                                 ?>
+                                            </td>
+                                            <td>
+                                                <?php
+                                                    $prescription = mysqli_query($conn, "SELECT * FROM prescription WHERE appointment_id = '$row[serial_number]'");
+                                                    $pres = mysqli_fetch_assoc($prescription);
+
+                                                    if(mysqli_num_rows($prescription) > 0)
+                                                    {?>
+                                                        <a href="prescription.php?appointmentID=<?php echo $row['serial_number'];?>" class="btn btn-info"><i class="fa fa-eye"></i></a>
+                                                    <?php }else{?>
+                                                        <span class="text-danger">Not Made Yet</span>
+                                                    <?php } 
+                                                ?>   
                                             </td>
                                         </tr>
                                     <?php }?>

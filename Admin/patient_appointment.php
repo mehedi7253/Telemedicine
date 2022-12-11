@@ -101,8 +101,17 @@ $result_set = $conn->query($sql);
                                                         ?>
                                                     </td>
                                                     <td>
-                                                        <a href="" class="btn btn-info"><i class="fa fa-eye"></i></a> |
-                                                        <a href="prescription.php?appointmentID=<?php echo $row['serial_number']?>" class="btn btn-info"><i class="fa fa-plus"></i></a>
+                                                        <?php
+                                                            $prescription = mysqli_query($conn, "SELECT * FROM prescription WHERE appointment_id = '$row[serial_number]'");
+                                                            $pres = mysqli_fetch_assoc($prescription);
+
+                                                            if(mysqli_num_rows($prescription) > 0)
+                                                            {?>
+                                                                <a href="prescription_view.php?appointmentID=<?php echo $row['serial_number'];?>" class="btn btn-info"><i class="fa fa-eye"></i></a> 
+                                                            <?php }else{?>
+                                                                <a href="prescription.php?appointmentID=<?php echo $row['serial_number']?>" class="btn btn-info"><i class="fa fa-plus"></i></a>
+                                                            <?php } 
+                                                        ?>   
                                                     </td>
                                                 </tr>
                                             <?php } ?>
