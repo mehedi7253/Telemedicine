@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.3.0-dev+20220531.aadb8cc914
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 10, 2022 at 06:48 PM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.1.12
+-- Generation Time: Dec 11, 2022 at 01:27 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -37,17 +37,18 @@ CREATE TABLE `appointment` (
   `create_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `serial_number` varchar(255) DEFAULT NULL,
   `account_number` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `appointment`
 --
 
 INSERT INTO `appointment` (`id`, `patient_id`, `doctor_id`, `schedule_id`, `fee`, `status`, `create_at`, `serial_number`, `account_number`) VALUES
-(13, 43, 42, 65, '45', 1, '2022-12-09 18:41:30', '265247', '01941697253'),
+(13, 43, 42, 89, '45', 1, '2022-12-11 04:21:58', '265247', '01941697253'),
 (14, 43, 42, 72, '500', 1, '2022-12-10 15:45:16', '42567', '01866717285'),
 (15, 43, 42, 70, '500', 1, '2022-12-10 15:59:41', '193243', '01941697253'),
-(17, 43, 42, 75, '500', 1, '2022-12-10 17:05:11', '545118', '01234569');
+(17, 43, 42, 75, '500', 1, '2022-12-10 17:05:11', '545118', '01234569'),
+(18, 43, 42, 96, '500', 1, '2022-12-11 03:41:13', '632073', '123456789');
 
 -- --------------------------------------------------------
 
@@ -60,7 +61,7 @@ CREATE TABLE `blogs` (
   `blog_title` varchar(255) NOT NULL,
   `description` longtext NOT NULL,
   `blog_image` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `blogs`
@@ -81,7 +82,7 @@ CREATE TABLE `blog_comment` (
   `blog_id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
   `comment` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `blog_comment`
@@ -103,7 +104,7 @@ CREATE TABLE `blog_like_unlike` (
   `blog_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `like_unlike` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `blog_like_unlike`
@@ -127,7 +128,7 @@ CREATE TABLE `doctor` (
   `department` varchar(3000) NOT NULL,
   `specialization` varchar(2000) NOT NULL,
   `visit_fee` int(12) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `doctor`
@@ -169,21 +170,21 @@ CREATE TABLE `doctor_schedule` (
   `shchedule_date` date DEFAULT NULL,
   `start_time` time DEFAULT NULL,
   `end_time` time DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `doctor_schedule`
 --
 
 INSERT INTO `doctor_schedule` (`id`, `doctor_id`, `patient_id`, `shchedule_date`, `start_time`, `end_time`) VALUES
-(89, 42, NULL, '2022-12-11', '12:34:00', '12:39:00'),
-(90, 42, NULL, '2022-12-11', '12:39:00', '12:44:00'),
+(89, 42, 43, '2022-12-11', '12:34:00', '12:39:00'),
+(90, 42, 43, '2022-12-11', '12:39:00', '12:44:00'),
 (91, 42, NULL, '2022-12-11', '12:44:00', '12:49:00'),
 (92, 42, NULL, '2022-12-11', '12:49:00', '12:54:00'),
 (93, 42, NULL, '2022-12-11', '12:54:00', '12:59:00'),
 (94, 42, NULL, '2022-12-12', '13:36:00', '14:21:00'),
 (95, 42, NULL, '2022-12-12', '14:21:00', '15:06:00'),
-(96, 42, NULL, '2022-12-13', '10:30:00', '10:50:00'),
+(96, 42, 43, '2022-12-13', '10:30:00', '10:50:00'),
 (97, 42, NULL, '2022-12-13', '10:50:00', '11:10:00'),
 (98, 42, NULL, '2022-12-13', '11:10:00', '11:30:00'),
 (99, 42, NULL, '2022-12-13', '11:30:00', '11:50:00'),
@@ -201,7 +202,7 @@ CREATE TABLE `medicines` (
   `brand_name` varchar(2000) NOT NULL,
   `generic_name` varchar(2000) NOT NULL,
   `type` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `medicines`
@@ -230,7 +231,7 @@ CREATE TABLE `post_comment` (
   `post_id` int(11) NOT NULL,
   `details` varchar(10000) NOT NULL,
   `user_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -245,7 +246,14 @@ CREATE TABLE `prescription` (
   `test` varchar(255) DEFAULT NULL,
   `advice` varchar(255) DEFAULT NULL,
   `prescription` longtext NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `prescription`
+--
+
+INSERT INTO `prescription` (`id`, `appointment_id`, `symptoms`, `test`, `advice`, `prescription`) VALUES
+(6, 42, NULL, NULL, NULL, ' Felix Lawson, Yen Willis, Lewis Odonnell, Napa, ');
 
 -- --------------------------------------------------------
 
@@ -259,7 +267,7 @@ CREATE TABLE `prescription_medicine` (
   `frequency` varchar(2000) NOT NULL,
   `instruction` varchar(3000) NOT NULL,
   `prescription_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -276,14 +284,14 @@ CREATE TABLE `users` (
   `dob` date DEFAULT NULL,
   `role` int(12) NOT NULL COMMENT '0-paitient,1-admin,2-doctor,3-medcomp\r\n',
   `image` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `phone`, `dob`, `role`, `image`) VALUES
-(42, 'Mehedi Hasan', 'doctor@gmail.com', '09236968fe179eba9959ee08bb5bf80f', '01941697253', '1997-12-12', 2, 'IlMgnNvKli.jpeg'),
+(42, 'Mehedi Hasan', 'doctor@gmail.com', '202cb962ac59075b964b07152d234b70', '01941697253', '1997-12-12', 2, 'IlMgnNvKli.jpeg'),
 (43, 'user', 'user@gmail.com', '202cb962ac59075b964b07152d234b70', '018667178254', '1997-12-12', 0, 'images/users/10e0a246-a793-4f45-8462-567d0f5561131568193468366-Deewa-Printed-Jumpsuit-1581568193467754-5.jpg'),
 (44, 'Steven Hood', 'pharma@gmail.com', '202cb962ac59075b964b07152d234b70', '+1 (175) 453-7831', NULL, 3, ''),
 (49, 'Mysha', 'admin@gmail.com', '202cb962ac59075b964b07152d234b70', '01859983081', '2022-11-13', 1, 'images/users/IMG_2532.JPG'),
@@ -361,7 +369,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `appointment`
 --
 ALTER TABLE `appointment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `blogs`
@@ -403,7 +411,7 @@ ALTER TABLE `medicines`
 -- AUTO_INCREMENT for table `prescription`
 --
 ALTER TABLE `prescription`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `prescription_medicine`
@@ -421,3 +429,6 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+
