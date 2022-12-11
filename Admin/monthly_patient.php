@@ -44,37 +44,25 @@ $result_set=$conn->query($sql);
                 </div>
                 <!-- /# row -->
                 <section id="main-content">
-            
                 <div class="row">
-
-                
-
                         <div class="col-lg-12">
                             <div class="card">
-                                <div class="bootstrap-data-table-panel">
+                                <div class="card-body">
                                     <div class="table-responsive">
-                                        <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
+                                        <table id="myTable" class="display table table-bordered">
                                             <thead>
                                                 <tr>
-                                                    <th>Brand Name</th>
-                                                    <th>Generic Name</th>
-                                                    <th>Medicine Type</th>
-                                                    <th>Action</th>
+                                                    <th>#</th>
+                                                    <th>Doctor</th>
+                                                    <th>Total Visit</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            <?php foreach($result_set as $medicines){?>
                                                 <tr>
-                                                    <td><?=$medicines['brand_name']?></td>
-                                                    <td><?=$medicines['generic_name']?></td>
-                                                    <td><?=$medicines['type']?></td>
-                                                    <td>
-                                                        <a href="medicineupdate.php?medicine=<?php echo $medicines['id']?>" class="btn btn-info">Edit</a>
-                                                        <a href="delete.php?medicine=<?php echo $medicines['id']?>" class="btn btn-danger">Delete</a>
-                                                    </td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
                                                 </tr>
-                                                <?php }?>   
-                                       
                                             </tbody>
                                         </table>
                                     </div>
@@ -93,3 +81,10 @@ $result_set=$conn->query($sql);
     </div>
 
     <?php include_once(BASE_PATH.'/Admin/partial/footer.php'); ?>
+    <script>
+        CKEDITOR.replace( 'description' );
+
+        $(document).ready( function () {
+            $('#myTable').DataTable();
+        } );
+    </script>   

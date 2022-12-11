@@ -29,4 +29,12 @@ if (isset($_GET['blogID'])){
     header('Location: manage_blog.php');
 }
 
+if (isset($_GET['medicine'])){
+    $medicine = $_GET['medicine'];
+
+    $sql = $conn->query("DELETE FROM medicines WHERE id = $medicine");
+
+    $_SESSION['message'] = 'Remove Successful';
+    header('Location: medicine_list.php');
+}
 ?>

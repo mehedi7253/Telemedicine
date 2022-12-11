@@ -60,18 +60,16 @@
                             <li><a href="manage_blog.php">Manage Blog</a></li>
                         </ul>
                     </li>
-                    <!-- <li><a class="sidebar-sub-toggle" href="client_list.php"><i class="ti-target"></i> Manage Client </a> -->
-
-                    
-<!-- 
-                    <li><a href="add_doctor.php">ADD Doctors</a></li>
-                    <li><a href="add_pharmaceutical.php">ADD Pharmaceutical</a></li>
-                    <li><a href="doctor_list.php">Doctors</a></li>
-                    <li><a href="client_list.php">client</a></li>
-                    <li><a href="pharmaceutical_list.php">Paharmaceutical List</a></li>
-                    <li><a href="blog.php">blog</a></li> -->
-
-
+                    <li>
+                        <a class="sidebar-sub-toggle"><i class="ti-home2"></i>Report
+                            <span class="badge badge-primary"></span>
+                            <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                        <ul>
+                            <li><a href="monthly_patient.php"> Monthly Patient </a></li>
+                            <li><a href="monthly_earn.php">Monthly Earn</a></li>
+                        </ul>
+                    </li>
+                 
                 <?php } ?>
 
                 </li>

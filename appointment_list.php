@@ -49,10 +49,10 @@ $user = mysqli_fetch_assoc($result_set);
                                         <th>#</th>
                                         <th>Doctor Name</th>
                                         <th>Appointment Date</th>
-                                        <th>Start Time</th>
-                                        <th>End Time</th>
+                                        <th>Metting Time</th>
                                         <th>Status</th>
                                         <th>Prescription</th>
+                                        <th>join Link</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -69,8 +69,8 @@ $user = mysqli_fetch_assoc($result_set);
                                             <td><?php echo $i++;?></td>
                                             <td><?php echo $row['name']?></td>
                                             <td><?php echo $row['shchedule_date']?></td>
-                                            <td><?php echo $row['start_time']?></td>
-                                            <td><?php echo $row['end_time']?></td>
+                                            <td><?php echo $row['start_time']?> - <?php echo $row['end_time']?></td>
+                                            
                                             <td>
                                                 <?php
                                                     if($row['status'] == '1')
@@ -93,6 +93,9 @@ $user = mysqli_fetch_assoc($result_set);
                                                         <span class="text-danger">Not Made Yet</span>
                                                     <?php } 
                                                 ?>   
+                                            </td>
+                                            <td>
+                                                <a href="https://wa.me/88<?php echo $row['phone']?>" target="_blank" title="Whatsapp" class="text-info border-bottom">Join Now</a>
                                             </td>
                                         </tr>
                                     <?php }?>
