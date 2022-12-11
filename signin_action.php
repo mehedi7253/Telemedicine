@@ -63,7 +63,7 @@ if($result_set->num_rows>0){
     $_SESSION['login_count']++;
 	// echo 'invalid user';
 	if ($_SESSION['login_count']>=3){
-	 setcookie('blocked', 'true', time() + (60 * 10), "/"); 
+	 setcookie('blocked', 'true', time() + (60 * 1), "/"); 
 	 unset($_SESSION['login_count']);
 	}
 	$_SESSION['message']='user name or password is wrong. attempt:'.$_SESSION['login_count'];

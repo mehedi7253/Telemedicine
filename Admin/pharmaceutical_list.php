@@ -44,11 +44,7 @@ $result_set=$conn->query($sql);
                 </div>
                 <!-- /# row -->
                 <section id="main-content">
-            
-                <div class="row">
-
-                
-
+                    <div class="row">
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="bootstrap-data-table-panel">
@@ -70,7 +66,7 @@ $result_set=$conn->query($sql);
                                                     <td><?=$users['phone']?></td>
                                                     <td><button type="button" class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5"><i class="fa fa-pencil"></i>Upadate</button>
                                                     <button type="button" class="btn btn-danger btn-flat btn-addon m-b-10 m-l-5"><i class="fa fa-trash-o"></i>Delete</button></td>
-                                                  
+                                                    
                                                 </tr>
                                                 
                                             <?php }?>
@@ -81,11 +77,7 @@ $result_set=$conn->query($sql);
                             </div>
                             <!-- /# card -->
                         </div>
-                        <!-- /# column -->
-
                     </div>
-                    
-
                 </section>
             </div>
         </div>
