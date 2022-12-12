@@ -65,12 +65,8 @@ include_once(BASE_PATH . '/telemedicine.php');
                                     $chkNew .= $chkNew1 . ", ";
                                 }
                                 $addmed = mysqli_query($conn, "INSERT INTO prescription (appointment_id, symptoms, test, advice, prescription) values ('$id', '$symptoms', '$test', '$advice', '$chkNew')");
+                                $update = mysqli_query($conn, "UPDATE appointment SET status = '2' WHERE serial_number ='$id'");
                                 $_SESSION['message'] = "Prescription Generate Successfull";
-
-                                if($addmed)
-                                {
-
-                                }
                             }
                             ?>
                             <div class="col-md-12 col-sm-12 float-left">
