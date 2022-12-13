@@ -83,7 +83,7 @@ $result_set=$conn->query($sql);
                                                     <td><?=$doctor['specialization']?></td>
                                                     <td>
                                                         <a href="doctor_edit.php?docotrID=<?php echo $doctor['DoctorID']?>" class="btn btn-info btn-flat btn-addon m-b-10 m-l-5"><i class="fa fa-edit"></i> Edit</a>
-                                                        <!-- <a class="btn btn-danger btn-flat btn-addon m-b-10 m-l-5" href="delete.php?delete_doctor=<?php echo $doctor['UserID']?>"><i class="fa fa-trash-o"></i>Delete</a> -->
+                                                        <a class="btn btn-danger btn-flat btn-addon m-b-10 m-l-5" href="delete.php?delete_doctor=<?php echo $doctor['UserID']?>"><i class="fa fa-trash-o"></i>Delete</a>
                                                     </td>     
                                                 </tr>
                                                 

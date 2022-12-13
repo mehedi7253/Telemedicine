@@ -37,4 +37,25 @@ if (isset($_GET['medicine'])){
     $_SESSION['message'] = 'Remove Successful';
     header('Location: medicine_list.php');
 }
+
+
+if (isset($_GET['delete_doctor'])) {
+    $doctor_id = $_GET['delete_doctor'];
+
+    $sql = $conn->query("DELETE FROM users WHERE id = $doctor_id");
+    $sql2 = $conn->query("DELETE FROM doctor WHERE user_id = $doctor_id");
+
+    $_SESSION['message'] = 'Remove Successful';
+    header('Location: doctor_list.php');
+}
+
+if (isset($_GET['delete_pharma'])) {
+    $delete_pharma = $_GET['delete_pharma'];
+
+    $sql = $conn->query("DELETE FROM users WHERE id = $delete_pharma");
+
+    $_SESSION['message'] = 'Remove Successful';
+    header('Location: pharmaceutical_list.php');
+}
+
 ?>

@@ -64,9 +64,10 @@ $result_set=$conn->query($sql);
                                                     <td><?=$users['name']?></td>
                                                     <td><?=$users['email']?></td>
                                                     <td><?=$users['phone']?></td>
-                                                    <td><button type="button" class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5"><i class="fa fa-pencil"></i>Upadate</button>
-                                                    <button type="button" class="btn btn-danger btn-flat btn-addon m-b-10 m-l-5"><i class="fa fa-trash-o"></i>Delete</button></td>
-                                                    
+                                                    <td>
+                                                        <button type="button" class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5"><i class="fa fa-pencil"></i>Upadate</button>
+                                                        <a class="btn btn-danger btn-flat btn-addon m-b-10 m-l-5" href="delete.php?delete_pharma=<?php echo $users['id']?>"><i class="fa fa-trash-o"></i>Delete</a>
+                                                    </td>
                                                 </tr>
                                                 
                                             <?php }?>
