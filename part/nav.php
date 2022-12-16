@@ -15,7 +15,7 @@
 					<li class="nav-item"><a class="nav-link" href="blog.php">Blogs</a></li>			
 					<li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
 					<?php
-					if(isset ($_SESSION['logged_in']) && $_SESSION['logged_in']){?> 
+					if(isset ($_SESSION['logged_in']) && $_SESSION['logged_in'] && $_SESSION['user_role'] == '0'){?> 
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="blog-sidebar.php" id="dropdown05" data-toggle="dropdown"
 								aria-haspopup="true" aria-expanded="false">
